@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title Weather
+    script(type='text/javascript').
+          function getWeather(){
+            window.location.assign("http://api.openweathermap.org/data/2.5/weather?lat=#{latitude}&lon=#{longitude}&mode=html&appid=c1a73b1800c98f3a62d3f076c71b7393"); 
+          };
+
+  body
+    h1 #{title}
+    p longitude: #{longitude}
+    p latitude: #{latitude}
+    p ip: #{ip}
+    p click below
+    button#getIt(onclick='getWeather()') Get Weather
+    

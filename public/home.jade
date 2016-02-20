@@ -1,0 +1,40 @@
+html
+  head
+    title Weather App
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(src='http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js')      
+  body
+    h1 Weather App
+    p#ip
+    table#GeoResults
+    h3 Current Weather
+    table#Weather
+    script.
+      $.getJSON("https://api.ipify.org?format=jsonp&callback=?", function(data) {
+      $("#ip").html("Your public IP address is: "+data.ip);
+      getLocation(data);
+      });
+      function getLocation(data){
+      $.getJSON("http://ip-api.com/json/"+data.ip+"?callback=?", function(info) {
+      var table_body = "";
+      $.each(info, function(k, v) {
+      table_body += "<tr><td>" + k + "</td><td><b>" + v + "</b></td></tr>";
+      });
+      getWeather(info);
+      console.log(JSON.stringify(info));
+      $("#GeoResults").html(table_body);
+      });
+      }
+      function getWeather(info){
+      $.getJSON("http://api.openweathermap.org/data/2.5/weather?lat="+info.lat+"&lon="+info.lon+"&callback=?&appid=c1a73b1800c98f3a62d3f076c71b7393", function(json) {
+      var table_body = "";
+      table_body += "<tr><td>" + 'Weather' + "</td><td><b>" + json.weather[0].main + "</b></td></tr>";
+      table_body += "<tr><td>" + 'Temperature' + "</td><td><b>" + Math.round(json.main.temp-273.15) +" Celsius "+ "</b></td></tr>";
+      table_body += "<tr><td>" + 'Pressure' + "</td><td><b>" + json.main.pressure + " hPa "+ "</b></td></tr>";
+      table_body += "<tr><td>" + 'Humidity' + "</td><td><b>" + json.main.humidity + "% "+ "</b></td></tr>";
+      table_body += "<tr><td>" + 'Wind Speed' + "</td><td><b>" + json.wind.speed +" m/s " +"</b></td></tr>";
+      table_body += "<tr><td>" + 'Wind Degree' + "</td><td><b>" + json.wind.deg + " deg "+"</b></td></tr>";
+      $("#Weather").html(table_body);
+      console.log(JSON.stringify(json));
+      });
+      };

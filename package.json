@@ -1,0 +1,25 @@
+{
+  "name": "weathermap",
+  "version": "1.0.0",
+  "description": "this is a middleware that provides weather by detecting ip address",
+  "main": "project2.js",
+  "dependencies": {
+    "co-body": "^4.0.0",
+    "co-views": "^2.1.0",
+    "koa": "^1.1.2",
+    "koa-render": "^0.2.1",
+    "koa-render-jade": "0.0.2",
+    "kroute": "^1.1.0",
+    "public-ip": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "koa.js",
+    "node.js"
+  ],
+  "author": "Katherine Junyi Sun",
+  "license": "ISC"
+}
